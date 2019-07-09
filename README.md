@@ -25,6 +25,10 @@ To run the code one has to update the scanned color vector and run the code.
 ```python
 colors = [([120, 0, 0], 100), ([0, 120, 0], 100), ([135,4,30], 100), ([0, 120, 0], 100), ([150, 0, 180], 100),([130, 0, 130], 100),([155,124,0], 100)]
 ```
+One color in the color Vector is defined by the tuple of the RGB values and an Delta window:
+```python
+color  = ([120, 0, 0], 100) # ([R+Delta,G+Delta,B+Delta], Delta)
+```
 
 run the script using the following command :
 ```bash
@@ -58,7 +62,11 @@ python3 color2osc_14notes.py
 ```
 the codes uses by default the following colors:
 
+```python
+colors = [([120, 0, 0], 100), ([0, 120, 0], 100), ([135,4,30], 100), ([0, 120, 0], 100), ([150, 0, 180], 100),([130, 0, 130], 100),([155,124,0], 100)]
+```
 
+(230, 25, 75), (60, 180, 75), (255, 225, 25), (0, 130, 200), (245, 130, 48), (145, 30, 180), (70, 240, 240), (240, 50, 230), (210, 245, 60), (250, 190, 190), (0, 128, 128), (230, 190, 255), (170, 110, 40), (255, 250, 200), (128, 0, 0), (170, 255, 195), (128, 128, 0), (255, 215, 180), (0, 0, 128), (128, 128, 128), (255, 255, 255), (0, 0, 0)
 
 then start the supercollider sketch:
 
@@ -67,7 +75,10 @@ until finished
 ```
 
 
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgement
+
+The name for this project comes form looking at slimy color changes under the lens of   

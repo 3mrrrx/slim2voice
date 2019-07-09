@@ -20,12 +20,12 @@ plt.style.use('fivethirtyeight')
 # debug
 ###########################################################################################################################
 
-histogram = 1           # plots a live histogram of the colors
+histogram = 0           # plots a live histogram of the colors
 show_org = 0            # shows a live image from orginal video
 motion_dictection = 0   # not implanted
 save_image = 0          # saves the recorded video to creat loops (not full implanted)
 save_perc_graph = 0     # saves the finale version of the recorded histogram of the colors
-print_color_prog = 0    #
+print_color_prog = 1    #
 
 ###########################################################################################################################
 # defs
@@ -89,10 +89,10 @@ def rescale(n, range1, range2):
 
 # def for OSC messages
 def send_freqs_to_synth_0(freqs):
-    client.send_message("/osm/a/cv", freqs)
+    client.send_message("/filter_0", freqs)
 
-def send_freqs_to_synth_1(freqs):
-    client.send_message("/osm/b/cv", freqs)
+def send_freqs_to_synth(freqs):
+    client.send_message("/filter", freqs)
 
 def send_freqs_to_synth_2(freqs):
     client.send_message("/filter_2", freqs)
@@ -116,8 +116,6 @@ def play_synth(argument):
     fundamental = 40 # fundamental note of scale
     a = 24 # change octave for player a
     b = 0  # change octave for player b
-    send_freqs_to_synth_0(argument[0])
-    send_freqs_to_synth_1(argument[1])
 
     # send OSC messages
     for i , x in enumerate(argument):
@@ -131,7 +129,7 @@ def play_synth(argument):
 ###########################################################################################################################
 
 # web cam
-cap = cv2.VideoCapture(2)
+cap = cv2.VideoCapture(0)
 
 # or read video
 # path = os.path.join("..", "video", )
@@ -158,7 +156,7 @@ hsv[...,1] = 255
 
 #colors = [([145, 80, 40], 50), ([50, 80, 255], 50), ([185, 130, 51], 50), ([50, 10, 39], 50), ([50, 80, 39], 50)]
 #colors = [([255, 0, 0], 50), ([0, 0, 0], 50), ([135,4,0], 50), ([0, 255, 0], 50), ([200, 130, 180], 50),([255, 0, 255], 50),([185,124,109], 50)]
-colors = [([150, 150, 150], 120), ([255, 255, 255], 150)]
+colors = [([120, 0, 0], 100), ([0, 120, 0], 100), ([135,4,30], 100), ([0, 120, 0], 100), ([150, 0, 180], 100),([130, 0, 130], 100),([155,124,0], 100)]
 
 color_pers_list = [] #np.empty([1, len(colors)])
 
@@ -180,9 +178,9 @@ color_pers_list = [] #np.empty([1, len(colors)])
 print("setting put OSC client")
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--ip", default="192.168.0.1",
+parser.add_argument("--ip", default="192.168.178.93",
                     help="The ip of the OSC server")
-parser.add_argument("--port", type=int, default=8000,
+parser.add_argument("--port", type=int, default=9000,
                     help="The port the OSC server is listening on")
 args = parser.parse_args()
 
@@ -301,7 +299,6 @@ while(1):
     ####################################################################################################
 
     # send osc messages
-    print(color_prec_frame)
     play_synth(color_prec_frame)
 
     ####################################################################################################
