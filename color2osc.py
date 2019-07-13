@@ -11,8 +11,7 @@ import argparse
 from pythonosc import udp_client
 
 # for logging function
-import sys
-import os
+import sys, os
 
 # matplotlib color scheam
 plt.style.use('fivethirtyeight')
@@ -200,7 +199,7 @@ cap = cv2.VideoCapture(2)
 #colors = [([255, 0, 0], 50), ([0, 0, 0], 50), ([135,4,0], 50), ([0, 255, 0], 50), ([200, 130, 180], 50),([255, 0, 255], 50),([185,124,109], 50)]
 colors = [([150, 150, 150], 120), ([255, 255, 255], 150)]
 
-color_perc_list = [] #np.empty([1, len(colors)])
+color_perc_list = [] # list of all color percentages of all frames 
 
 ###########################################################################################################################
 # set up OSC
@@ -280,7 +279,7 @@ while(1):
     # calatulate color percentage
     ####################################################################################################
 
-    color_prec_frame = [] # list with color persecnt for current frame
+    color_prec_frame = [] # list of color percentages for current frame
 
     imgs = img
     # start the image array with orginal frame
