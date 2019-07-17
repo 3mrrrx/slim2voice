@@ -199,7 +199,7 @@ cap = cv2.VideoCapture(2)
 #colors = [([255, 0, 0], 50), ([0, 0, 0], 50), ([135,4,0], 50), ([0, 255, 0], 50), ([200, 130, 180], 50),([255, 0, 255], 50),([185,124,109], 50)]
 colors = [([150, 150, 150], 120), ([255, 255, 255], 150)]
 
-color_perc_list = [] # list of all color percentages of all frames 
+color_perc_list = [] # list of all color percentages of all frames
 
 ###########################################################################################################################
 # set up OSC
@@ -337,8 +337,9 @@ while(1):
         if frame_num == 0:
             creat_histogram_plot()
 
-        for channel, col in enumerate(color):
-            histr = cv2.calcHist([frame2], [channel], None, [256], [0, 256])
+        for i, col in enumerate(color):
+            histr = cv2.calcHist([frame2], [i], None, [256], [0, 256])
+            hist = cv2.normalize(hist)
             plt.plot(histr, color=col)
 
         #ani = animation.FuncAnimation(fig, animate, interval=1000)
